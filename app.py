@@ -11,6 +11,15 @@ app = Flask(__name__)
 
 TRAITS = ['O', 'C', 'E', 'A', 'N']
 
+# Which of the 25 answers belong to each trait (0-indexed)
+TRAIT_QUESTIONS = {
+    'O': slice(0,  5),
+    'C': slice(5,  10),
+    'E': slice(10, 15),
+    'A': slice(15, 20),
+    'N': slice(20, 25),
+}
+
 TRAIT_META = {
     'O': {
         'name': 'Openness',
@@ -80,17 +89,18 @@ def predict():
         return jsonify({'error': f'Expected 25 answers, got {len(answers)}'}), 400
 
     X = np.array(answers, dtype=float).reshape(1, -1)
+    raw  = np.array(answers, dtype=float)  # for direct score computation
     result = {}
 
     for t in TRAITS:
         model = models[t]
-        pred = int(model.predict(X)[0])
-        try:
-            proba = float(model.predict_proba(X)[0][1])  # P(High)
-        except AttributeError:
-            proba = float(pred)
+        pred  = int(model.predict(X)[0])
 
-        score_pct = round(proba * 100, 1)
+        # Score = mean of the 5 trait-specific answers, normalised to 0–100%
+        # This gives smooth, meaningful scores regardless of model confidence
+        trait_mean = raw[TRAIT_QUESTIONS[t]].mean()          # 1.0 – 5.0
+        score_pct  = round((trait_mean - 1) / 4 * 100, 1)   # 0 – 100 %
+
         meta = TRAIT_META[t]
         result[t] = {
             'name':        meta['name'],

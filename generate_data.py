@@ -35,7 +35,8 @@ data = {}
 for i, trait in enumerate(TRAITS):
     for q in range(5):
         col = f'Q{i * 5 + q + 1}'
-        noise = np.random.normal(0, 0.08, N)
+        # More per-question noise so questions don't perfectly predict the trait mean
+        noise = np.random.normal(0, 0.14, N)
         score = latent[:, i] + noise
         # Map (0–1) → Likert (1–5)
         likert = np.clip(np.round(score * 4 + 1), 1, 5).astype(int)
@@ -47,7 +48,15 @@ df = pd.DataFrame(data)
 for i, trait in enumerate(TRAITS):
     qs = [f'Q{i * 5 + q + 1}' for q in range(5)]
     df[f'{trait}_score'] = df[qs].mean(axis=1)
-    df[f'{trait}_label'] = (df[f'{trait}_score'] >= 3.0).astype(int)  # 1=High, 0=Low
+
+    # Probabilistic label using sigmoid boundary + uniform noise
+    # This creates genuine uncertainty near the midpoint (score ≈ 3.0)
+    # so the model cannot achieve perfect separation
+    scores = df[f'{trait}_score'].values
+    probs = 1 / (1 + np.exp(-2.5 * (scores - 3.0)))  # sigmoid centred at 3.0
+    noise  = np.random.uniform(-0.18, 0.18, N)        # boundary noise ±18%
+    probs  = np.clip(probs + noise, 0.05, 0.95)       # never allow pure 0 or 1
+    df[f'{trait}_label'] = (np.random.uniform(0, 1, N) < probs).astype(int)
 
 Path('data').mkdir(exist_ok=True)
 df.to_csv('data/personality_dataset.csv', index=False)

@@ -2,61 +2,61 @@
   "O": {
     "name": "Openness",
     "best_model": "Logistic Regression",
-    "cv_f1": 1.0,
-    "test_accuracy": 1.0,
-    "test_f1": 1.0,
+    "cv_f1": 0.7846,
+    "test_accuracy": 0.77,
+    "test_f1": 0.7681,
     "all_model_scores": {
-      "Logistic Regression": 1.0,
-      "Random Forest": 0.9943,
-      "Gradient Boosting": 0.9948
+      "Logistic Regression": 0.7846,
+      "Random Forest": 0.7774,
+      "Gradient Boosting": 0.7487
     }
   },
   "C": {
     "name": "Conscientiousness",
     "best_model": "Logistic Regression",
-    "cv_f1": 1.0,
-    "test_accuracy": 1.0,
-    "test_f1": 1.0,
+    "cv_f1": 0.7891,
+    "test_accuracy": 0.745,
+    "test_f1": 0.741,
     "all_model_scores": {
-      "Logistic Regression": 1.0,
-      "Random Forest": 0.9902,
-      "Gradient Boosting": 0.9933
+      "Logistic Regression": 0.7891,
+      "Random Forest": 0.7861,
+      "Gradient Boosting": 0.7636
     }
   },
   "E": {
     "name": "Extraversion",
-    "best_model": "Logistic Regression",
-    "cv_f1": 1.0,
-    "test_accuracy": 1.0,
-    "test_f1": 1.0,
+    "best_model": "Random Forest",
+    "cv_f1": 0.7997,
+    "test_accuracy": 0.7475,
+    "test_f1": 0.7425,
     "all_model_scores": {
-      "Logistic Regression": 1.0,
-      "Random Forest": 0.9925,
-      "Gradient Boosting": 0.996
+      "Logistic Regression": 0.7938,
+      "Random Forest": 0.7997,
+      "Gradient Boosting": 0.7798
     }
   },
   "A": {
     "name": "Agreeableness",
-    "best_model": "Logistic Regression",
-    "cv_f1": 1.0,
-    "test_accuracy": 1.0,
-    "test_f1": 1.0,
+    "best_model": "Random Forest",
+    "cv_f1": 0.7816,
+    "test_accuracy": 0.7225,
+    "test_f1": 0.7193,
     "all_model_scores": {
-      "Logistic Regression": 1.0,
-      "Random Forest": 0.9898,
-      "Gradient Boosting": 0.9925
+      "Logistic Regression": 0.7693,
+      "Random Forest": 0.7816,
+      "Gradient Boosting": 0.7666
     }
   },
   "N": {
     "name": "Neuroticism",
     "best_model": "Logistic Regression",
-    "cv_f1": 1.0,
-    "test_accuracy": 1.0,
-    "test_f1": 1.0,
+    "cv_f1": 0.6819,
+    "test_accuracy": 0.71,
+    "test_f1": 0.7072,
     "all_model_scores": {
-      "Logistic Regression": 1.0,
-      "Random Forest": 0.9833,
-      "Gradient Boosting": 0.9934
+      "Logistic Regression": 0.6819,
+      "Random Forest": 0.668,
+      "Gradient Boosting": 0.6614
     }
   }
 }
