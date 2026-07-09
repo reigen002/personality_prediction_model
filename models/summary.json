@@ -1,0 +1,62 @@
+{
+  "O": {
+    "name": "Openness",
+    "best_model": "Logistic Regression",
+    "cv_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0,
+    "all_model_scores": {
+      "Logistic Regression": 1.0,
+      "Random Forest": 0.9943,
+      "Gradient Boosting": 0.9948
+    }
+  },
+  "C": {
+    "name": "Conscientiousness",
+    "best_model": "Logistic Regression",
+    "cv_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0,
+    "all_model_scores": {
+      "Logistic Regression": 1.0,
+      "Random Forest": 0.9902,
+      "Gradient Boosting": 0.9933
+    }
+  },
+  "E": {
+    "name": "Extraversion",
+    "best_model": "Logistic Regression",
+    "cv_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0,
+    "all_model_scores": {
+      "Logistic Regression": 1.0,
+      "Random Forest": 0.9925,
+      "Gradient Boosting": 0.996
+    }
+  },
+  "A": {
+    "name": "Agreeableness",
+    "best_model": "Logistic Regression",
+    "cv_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0,
+    "all_model_scores": {
+      "Logistic Regression": 1.0,
+      "Random Forest": 0.9898,
+      "Gradient Boosting": 0.9925
+    }
+  },
+  "N": {
+    "name": "Neuroticism",
+    "best_model": "Logistic Regression",
+    "cv_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0,
+    "all_model_scores": {
+      "Logistic Regression": 1.0,
+      "Random Forest": 0.9833,
+      "Gradient Boosting": 0.9934
+    }
+  }
+}

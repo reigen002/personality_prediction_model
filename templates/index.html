@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personality Predictor — Big Five OCEAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ───────── WELCOME SCREEN ───────── -->
+  <section id="welcome-screen" class="screen active">
+    <div class="welcome-card glass">
+      <div class="logo-badge">🧠</div>
+      <h1>Personality Predictor</h1>
+      <p class="subtitle">Discover your <strong>Big Five (OCEAN)</strong> personality profile through 25 simple questions.</p>
+
+      <div class="trait-pills">
+        <span class="pill" style="--c:#a78bfa">🎨 Openness</span>
+        <span class="pill" style="--c:#34d399">📋 Conscientiousness</span>
+        <span class="pill" style="--c:#fbbf24">🌟 Extraversion</span>
+        <span class="pill" style="--c:#f472b6">🤝 Agreeableness</span>
+        <span class="pill" style="--c:#60a5fa">🌊 Neuroticism</span>
+      </div>
+
+      <ul class="info-list">
+        <li>📝 25 questions &nbsp;·&nbsp; ~3 minutes</li>
+        <li>🤖 ML-powered analysis (3 models per trait)</li>
+        <li>📊 Instant radar chart results</li>
+      </ul>
+
+      {% if summary %}
+      <div class="model-badge">
+        Model Summary:
+        {% for key, val in summary.items() %}
+          <span>{{ val.name }}: <b>{{ val.best_model }}</b> (F1 {{ val.test_f1 }})</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <button id="start-btn" class="btn-primary" onclick="startQuiz()">Start Assessment →</button>
+    </div>
+  </section>
+
+  <!-- ───────── QUIZ SCREEN ───────── -->
+  <section id="quiz-screen" class="screen">
+    <div class="quiz-wrapper">
+
+      <!-- Progress -->
+      <div class="progress-header">
+        <div class="progress-info">
+          <span id="page-label">Page 1 of 5</span>
+          <span id="trait-label" class="trait-tag">Openness</span>
+        </div>
+        <div class="progress-bar-track">
+          <div id="progress-bar" class="progress-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Questions container -->
+      <div id="questions-container"></div>
+
+      <!-- Navigation -->
+      <div class="quiz-nav">
+        <button id="prev-btn" class="btn-secondary" onclick="prevPage()" disabled>← Back</button>
+        <div id="dots-container" class="dots"></div>
+        <button id="next-btn" class="btn-primary" onclick="nextPage()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── LOADING SCREEN ───────── -->
+  <section id="loading-screen" class="screen">
+    <div class="loading-card glass">
+      <div class="spinner"></div>
+      <h2>Analyzing your responses…</h2>
+      <p>Running ML models across all 5 personality dimensions</p>
+      <div class="loading-traits">
+        <span id="load-O" class="load-trait">🎨 Openness</span>
+        <span id="load-C" class="load-trait">📋 Conscientiousness</span>
+        <span id="load-E" class="load-trait">🌟 Extraversion</span>
+        <span id="load-A" class="load-trait">🤝 Agreeableness</span>
+        <span id="load-N" class="load-trait">🌊 Neuroticism</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── RESULTS SCREEN ───────── -->
+  <section id="results-screen" class="screen">
+    <div class="results-wrapper">
+      <h1 class="results-title">Your Personality Profile</h1>
+      <p class="results-subtitle">Based on your 25 responses, here's your Big Five analysis</p>
+
+      <div class="results-layout">
+        <!-- Radar Chart -->
+        <div class="chart-card glass">
+          <h3>OCEAN Radar</h3>
+          <canvas id="radar-chart" width="320" height="320"></canvas>
+        </div>
+
+        <!-- Trait Cards -->
+        <div id="trait-cards" class="trait-cards"></div>
+      </div>
+
+      <button class="btn-secondary" onclick="resetQuiz()" style="margin-top:2rem">↺ Retake Assessment</button>
+    </div>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
